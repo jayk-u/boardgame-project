@@ -1,0 +1,75 @@
+openapi: 3.1.0
+
+info:
+  title: "Board Games API"
+  version: "0.1"
+  summary: "A useful API to check Board Games releases"
+  description: |
+    **WOW**
+
+servers:
+  - url: "api.boardgames.com"
+    description: "That's the greatest server"
+  - url: "api.boardgames.org"
+    description: "Alternative server for greatest bobos"
+
+paths:
+  /games:
+    get:
+      parameters: 
+        - name: "search"
+          description: "Search string to filter out the results"
+          in: "query"
+      responses:
+        200: 
+          description: |
+            Board games found, here comes a short list
+
+            > success
+            > You successfully used a keyboard. Congratulations!
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    name:
+                      type: "string"
+                    players:
+                      type: "integer"
+                      description: "Minimum number of players"
+                      minimum: 0
+                    age:
+                      type: "integer"
+                      description: "Minimum required age"
+                      minimum: 3
+                    time:
+                      type: "string"
+                      format: "duration"
+                      description: "Average duration of a game"
+              examples:
+                coop:
+                  summary: "A list of cooperative and competitive board games"
+                  value:
+                    - name: "Nemesis"
+                      players: 4
+                      age: 12
+                      time: 120
+                    - name: "Oath"
+                      players: 3
+                      age: 12
+                      time: 60
+                competitive:
+                  summary: "A list of competitive board games"
+                  value:
+                    - name: "7 Wonders"
+                      players: 3
+                      age: 8
+                      time: 45
+                    - name: "Parks"
+                      players: 3
+                      age: 12
+                      time: 60
+                  
+    post: {}
